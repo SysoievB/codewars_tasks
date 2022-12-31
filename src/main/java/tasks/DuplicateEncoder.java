@@ -1,8 +1,6 @@
 package tasks;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.stream.Collectors;
 
 /**
@@ -22,30 +20,26 @@ import java.util.stream.Collectors;
  */
 public class DuplicateEncoder {
     public static void main(String[] args) {
-        System.out.println(encode("did"));
+        System.out.println(encode("recede"));
     }
 
     static String encode(String word) {
         var list = Arrays.stream(word.split(""))
                 .collect(Collectors.toList());
 
-        var listDistinct = list.stream().distinct().collect(Collectors.toList());
-        if (list.size() == listDistinct.size()) {
-            StringBuilder stringBuilder = new StringBuilder();
-            for (int i = 1; i <= list.size(); i++) {
-                stringBuilder.append("(");
-            }
-            return stringBuilder.toString();
-        }
-        List<String> resultList = new ArrayList<>();
-        for (int i = 0; i < list.size()-1; i++) {
-            if (list.get(i).equalsIgnoreCase(list.get(i + 1))) {
-                resultList.add(")");
-            } else {
-                resultList.add("(");
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i = 0; i < list.size() - 1; i++) {
+            for (int k = i + 1; k < list.size(); k++) {
+                if (i != k) {
+                    if (list.get(i).equalsIgnoreCase(list.get(k))) {
+                        stringBuilder.append(")");
+                    } else {
+                        stringBuilder.append("(");
+                    }
+                }
             }
         }
-
-        return String.join("", resultList);
+        System.out.println(list);
+        return stringBuilder.toString();
     }
 }
