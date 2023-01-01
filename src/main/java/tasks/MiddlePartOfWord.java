@@ -1,8 +1,6 @@
 package tasks;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.stream.Collectors;
 
 /**
@@ -31,22 +29,21 @@ import java.util.stream.Collectors;
  */
 public class MiddlePartOfWord {
     public static void main(String[] args) {
-        System.out.println(getMiddle("even"));
+        System.out.println(getMiddle("1"));
     }
 
     public static String getMiddle(String word) {
         var list = Arrays.stream(word.split(""))
                 .collect(Collectors.toList());
-        List<String> resultList = new ArrayList<>();
-       // for (int i = 0; i < list.size(); i++) {
-            if (list.size() % 2 == 0) {
-                int middleVal = list.size() / 2;
-                resultList.add(list.get(middleVal - 1));
-                resultList.add(list.get(middleVal + 1));
-            } else {
+        StringBuilder stringBuilder = new StringBuilder();
+        int middleVal = list.size() / 2;
+        if (list.size() % 2 == 0) {
+            stringBuilder.append(list.get(middleVal - 1));
+            stringBuilder.append(list.get(middleVal));
+        } else {
+            stringBuilder.append(list.get(middleVal));
+        }
 
-            }
-       // }
-        return String.join("", resultList);
+        return stringBuilder.toString();
     }
 }
