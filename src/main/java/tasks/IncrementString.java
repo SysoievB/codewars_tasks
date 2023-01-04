@@ -25,6 +25,13 @@ public class IncrementString {
     }
 
     public static String incrementString(String str) {
+        String numberOnly = "";
+        int number;
+        if (str.matches("\\d")) {
+            numberOnly = str.replaceAll("\\D+", "");
+            number = Integer.parseInt(numberOnly);
+            number++;
+        }
         return str; // you code here
     }
 }
