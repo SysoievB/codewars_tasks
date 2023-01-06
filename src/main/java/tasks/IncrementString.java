@@ -21,17 +21,19 @@ package tasks;
  */
 public class IncrementString {
     public static void main(String[] args) {
-
+        System.out.println(incrementString("foo9"));
+        //System.out.println("foo9".replaceAll("\\D+", ""));
     }
 
     public static String incrementString(String str) {
-        String numberOnly = "";
         int number;
-        if (str.matches("\\d")) {
-            numberOnly = str.replaceAll("\\D+", "");
-            number = Integer.parseInt(numberOnly);
-            number++;
+        if (str.matches("\\d+")) {
+            number = Integer.parseInt(str.replaceAll("\\d+", ""));
+            number = number + 1;
+        } else {
+            number = 1;
         }
-        return str; // you code here
+
+        return str.replaceAll("[^a-z]", "") + number;
     }
 }
