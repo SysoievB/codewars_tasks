@@ -1,0 +1,51 @@
+package tasks;
+
+import java.util.*;
+
+/**
+ * Consider a sequence u where u is defined as follows:
+ * <p>
+ * The number u(0) = 1 is the first one in u.
+ * For each x in u, then y = 2 * x + 1 and z = 3 * x + 1 must be in u too.
+ * There are no other numbers in u.
+ * Ex: u = [1, 3, 4, 7, 9, 10, 13, 15, 19, 21, 22, 27, ...]
+ * <p>
+ * 1 gives 3 and 4, then 3 gives 7 and 10, 4 gives 9 and 13, then 7 gives 15 and 22 and so on...
+ * <p>
+ * Task:
+ * Given parameter n the function dbl_linear (or dblLinear...) returns the element u(n) of the
+ * ordered (with <) sequence u (so, there are no duplicates).
+ * <p>
+ * Example:
+ * dbl_linear(10) should return 22
+ * <p>
+ * Note:
+ * Focus attention on efficiency
+ */
+public class DoubleLinear {
+    public static void main(String[] args) {
+        System.out.println(DoubleLinear.dblLinear(20));
+    }
+
+    public static int dblLinearWithList(int n) {
+        List<Integer> list = new ArrayList<>(List.of(1));
+        for (int i = 0; i <= n; i++) {
+            list.add(2 * list.get(i) + 1);
+            list.add(3 * list.get(i) + 1);
+        }
+        Set<Integer> set = new TreeSet<>(list);
+
+        return new ArrayList<>(set).get(n);
+    }
+
+    public static int dblLinear(int n) {
+        Map<Integer, Integer> map = new TreeMap<>(Map.of(0, 1));
+        int mapIndex = 1;
+        for (int i = 0; i <= n; i++) {
+            map.put(mapIndex++, 2 * map.get(i) + 1);
+            map.put(mapIndex++, 3 * map.get(i) + 1);
+        }
+
+        return map.get(n);
+    }
+}
