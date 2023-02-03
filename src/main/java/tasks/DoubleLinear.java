@@ -1,6 +1,7 @@
 package tasks;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Consider a sequence u where u is defined as follows:
@@ -27,25 +28,20 @@ public class DoubleLinear {
         System.out.println(DoubleLinear.dblLinear(20));
     }
 
-    public static int dblLinearWithList(int n) {
+    public static int dblLinear(int n) {
         List<Integer> list = new ArrayList<>(List.of(1));
+
         for (int i = 0; i <= n; i++) {
             list.add(2 * list.get(i) + 1);
             list.add(3 * list.get(i) + 1);
         }
-        Set<Integer> set = new TreeSet<>(list);
+        /*int i = 0;
+        while (i <= n) {
+            list.add(2 * list.get(i) + 1);
+            list.add(3 * list.get(i) + 1);
+            i++;
+        }*/
 
-        return new ArrayList<>(set).get(n);
-    }
-
-    public static int dblLinear(int n) {
-        Map<Integer, Integer> map = new TreeMap<>(Map.of(0, 1));
-        int mapIndex = 1;
-        for (int i = 0; i <= n; i++) {
-            map.put(mapIndex++, 2 * map.get(i) + 1);
-            map.put(mapIndex++, 3 * map.get(i) + 1);
-        }
-
-        return map.get(n);
+        return list.stream().distinct().sorted().collect(Collectors.toList()).get(n);
     }
 }
