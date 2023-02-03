@@ -35,12 +35,12 @@ public class DoubleLinear {
             list.add(2 * list.get(i) + 1);
             list.add(3 * list.get(i) + 1);
         }
-        /*int i = 0;
+        int i = 0;
         while (i <= n) {
             list.add(2 * list.get(i) + 1);
             list.add(3 * list.get(i) + 1);
             i++;
-        }*/
+        }
 
         return list.stream().distinct().sorted().collect(Collectors.toList()).get(n);
     }
