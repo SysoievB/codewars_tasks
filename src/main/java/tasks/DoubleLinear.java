@@ -1,6 +1,7 @@
 package tasks;
 
 import java.util.*;
+import java.util.stream.IntStream;
 
 /**
  * Consider a sequence u where u is defined as follows:
@@ -40,7 +41,7 @@ public class DoubleLinear {
     }
 
     public static int dblLinearWithMap(int n) {
-        Map<Integer, Integer> map = new TreeMap<>(Map.of(0, 1));
+        Map<Integer, Integer> map = new HashMap<>(Map.of(0, 1));
 
         for (Map.Entry<Integer, Integer> pair : map.entrySet()) {
             map.put(pair.getKey() + 1, 2 * map.get(pair.getKey()) + 1);
@@ -48,5 +49,12 @@ public class DoubleLinear {
         }
 
         return map.get(n);
+    }
+
+    public static int dblLinearWithStream(int n) {
+        //IntStream intStream =IntStream.generate(v->{});
+
+
+        return 0;
     }
 }
