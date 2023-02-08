@@ -1,6 +1,7 @@
 package tasks;
 
 import java.util.*;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 /**
@@ -48,13 +49,6 @@ public class DoubleLinear {
             map.put(pair.getKey() + 2, 3 * map.get(pair.getKey()) + 1);
         }
 
-        return map.get(n);
-    }
-
-    public static int dblLinearWithStream(int n) {
-        //IntStream intStream =IntStream.generate(v->{});
-
-
-        return 0;
+        return map.get(n);//todo: prints nullpointer instead of 57
     }
 }
