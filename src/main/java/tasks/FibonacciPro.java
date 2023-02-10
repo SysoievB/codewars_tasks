@@ -3,7 +3,6 @@ package tasks;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * The Fibonacci numbers are the numbers in the following integer sequence (Fn):
@@ -48,18 +47,46 @@ import java.util.stream.Collectors;
  */
 public class FibonacciPro {
     public static void main(String[] args) {
-        System.out.println(Arrays.toString(productFib(100)));
+        System.out.println(Arrays.toString(productFib(800)));
+        System.out.println(Arrays.toString(productFibBestSolution(800)));
     }
 
     public static long[] productFib(long prod) {
         List<Long> list = new ArrayList<>(Arrays.asList(0L, 1L));
         long value;
-        for (int i = 0; i < prod / 10; i++) {
-           // if (prod < list.get(i + 1)) {
-                value = list.get(i) + list.get(i + 1);
-                list.add(value);
-            //}
+        for (int i = 0; i < list.size(); i++) {
+            value = list.get(i) + list.get(i + 1);
+            list.add(value);
+            if (value >= prod / 2) break;
         }
-        return list.stream().mapToLong(Long::longValue).toArray();
+
+        List<Long> result = new ArrayList<>(3);
+
+        for (int i = 0; i < list.size(); i++) {
+            if ((list.get(i) * list.get(i + 1)) == prod) {
+                result.add(list.get(i));
+                result.add(list.get(i + 1));
+                result.add(1L);
+                break;
+            } else if ((list.get(i) * list.get(i + 1)) > prod) {
+                result.add(list.get(i));
+                result.add(list.get(i + 1));
+                result.add(0L);
+                break;
+            }
+        }
+
+        return result.stream().mapToLong(Long::longValue).toArray();
+    }
+
+    public static long[] productFibBestSolution(long prod) {
+        long a = 0;
+        long b = 1;
+        while (prod > a * b) {
+            long temp = b;
+            b = b + a;
+            a = temp;
+        }
+        return new long[] { a, b, a * b == prod ? 1 : 0 };
     }
 }
