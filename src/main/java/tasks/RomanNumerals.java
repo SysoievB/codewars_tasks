@@ -1,5 +1,8 @@
 package tasks;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Create a RomanNumerals class that can convert a roman numeral to and from an integer value.
  * It should follow the API demonstrated in the examples below. Multiple roman numeral values will
@@ -30,8 +33,8 @@ package tasks;
 public class RomanNumerals {
     public static void main(String[] args) {
         System.out.println(toRoman(2));
-        System.out.println(toRomanTen(4 ));
-        System.out.println(6%5);
+        System.out.println(toRomanTen(5));
+        System.out.println(6 % 5);
     }
 
     public static String toRoman(int n) {
@@ -50,21 +53,20 @@ public class RomanNumerals {
     }
 
     public static String toRomanTen(int n) {
-        StringBuilder romanNumber = new StringBuilder();
-        if (n < 1 || n > 9) return "";
+        Map<Integer, StringBuilder> map = new HashMap<>();
+        map.put(1, new StringBuilder("I"));
+        map.put(5, new StringBuilder("V"));
+        map.put(10, new StringBuilder("X"));
+        map.put(50, new StringBuilder("L"));
+        map.put(100, new StringBuilder("C"));
+        map.put(500, new StringBuilder("D"));
+        map.put(1000, new StringBuilder("M"));
 
-        int val;
-        if (n > 5) {
-            val = n % 5;
-            romanNumber.append("V");
-            if (val == 1) romanNumber.append("I");
-            else if (val == 2) romanNumber.append("II");
-            else if (val == 3) romanNumber.append("III");
-            else if (val == 4) romanNumber.append("IV");
-            //else if (val == 5) romanNumber.append("V");
+        if (n == 5) {
+            //return map.entrySet().stream().filter(k -> k.equals(n)).findFirst().orElseThrow().toString();
         }
 
-        return romanNumber.toString();
+        return "";
     }
 
     public static int fromRoman(String romanNumeral) {
