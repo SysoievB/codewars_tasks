@@ -32,41 +32,56 @@ import java.util.Map;
  */
 public class RomanNumerals {
     public static void main(String[] args) {
-        System.out.println(toRoman(2));
-        System.out.println(toRomanTen(5));
-        System.out.println(6 % 5);
+        //System.out.println(toRoman(2));
+        System.out.println(toRoman(9));
     }
 
     public static String toRoman(int n) {
-        if (n < 1 || n > 4000) return "Wrong number";
+        if (n < 1 || n >= 4000) return "Wrong number";
+        int numberForSubtraction = n;
 
-        String romanNumber = "";
-        if (n == 1) romanNumber = "I";
-        else if (n == 4) romanNumber = "IV";
-        else if (n == 5) romanNumber = "V";
-        else if (n == 10) romanNumber = "X";
-        else if (n == 50) romanNumber = "L";
-        else if (n == 100) romanNumber = "C";
-        else if (n == 500) romanNumber = "D";
-        else if (n == 1000) romanNumber = "M";
-        return romanNumber;
-    }
+        StringBuilder result = new StringBuilder();
+        Map<Integer, StringBuilder> map = new HashMap<>(
+                Map.of(
+                        1, new StringBuilder("I"),
+                        4, new StringBuilder("IV"),
+                        5, new StringBuilder("V"),
+                        9, new StringBuilder("IX"),
+                        10, new StringBuilder("X"),
+                        49, new StringBuilder("IL"),
+                        50, new StringBuilder("L"),
+                        100, new StringBuilder("C"),
+                        500, new StringBuilder("D"),
+                        1000, new StringBuilder("M")
+                ));
 
-    public static String toRomanTen(int n) {
-        Map<Integer, StringBuilder> map = new HashMap<>();
-        map.put(1, new StringBuilder("I"));
-        map.put(5, new StringBuilder("V"));
-        map.put(10, new StringBuilder("X"));
-        map.put(50, new StringBuilder("L"));
-        map.put(100, new StringBuilder("C"));
-        map.put(500, new StringBuilder("D"));
-        map.put(1000, new StringBuilder("M"));
+        var valuePresent = map.entrySet()
+                .stream()
+                .anyMatch(entry -> entry.getKey() == n);
 
-        if (n == 5) {
-            //return map.entrySet().stream().filter(k -> k.equals(n)).findFirst().orElseThrow().toString();
+        if (valuePresent) {
+            result.append(map.get(n));
         }
 
-        return "";
+        if (!valuePresent && n < 4) {
+            for (int i = 0; i < n; i++) {
+                result.append(map.get(1));
+            }
+        }
+
+        if (!valuePresent && n < 10 && n > 5) {
+            result.append(map.get(5));
+            numberForSubtraction -= 5;
+            if (numberForSubtraction < 4) {
+                for (int i = 0; i < numberForSubtraction; i++) {
+                    result.append(map.get(1));
+                }
+            }
+        }
+
+        //if(!valuePresent && n >10 && )
+
+        return result.toString();
     }
 
     public static int fromRoman(String romanNumeral) {
