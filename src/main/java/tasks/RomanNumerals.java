@@ -48,7 +48,6 @@ public class RomanNumerals {
                         5, new StringBuilder("V"),
                         9, new StringBuilder("IX"),
                         10, new StringBuilder("X"),
-                        49, new StringBuilder("IL"),
                         50, new StringBuilder("L"),
                         100, new StringBuilder("C"),
                         500, new StringBuilder("D"),
