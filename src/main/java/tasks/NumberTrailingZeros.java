@@ -24,13 +24,13 @@ import java.util.List;
  */
 public class NumberTrailingZeros {
     public static void main(String[] args) {
-        System.out.println(zeros(0));
+        System.out.println(zerosChatGPT(12));
     }
 
     public static int zeros(int n) {
         if (n == 0) return 0;
 
-        BigInteger factorialResult = new BigInteger("1");
+        BigInteger factorialResult = BigInteger.ONE;
         for (int i = 1; i <= n; i++) {
             factorialResult = factorialResult.multiply(BigInteger.valueOf(i));
         }
@@ -47,5 +47,17 @@ public class NumberTrailingZeros {
         }
 
         return Collections.max(zerosList);
+    }
+
+    public static int zerosChatGPT(int n) {
+        int count = 0;
+        for (int i = 5; i <= n; i += 5) {
+            int j = i;
+            while (j % 5 == 0) {
+                count++;
+                j /= 5;
+            }
+        }
+        return count;
     }
 }
